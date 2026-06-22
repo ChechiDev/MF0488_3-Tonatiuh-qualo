@@ -58,6 +58,37 @@ PORT      STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 33.70 seconds
 ```
 
+```bash
+┌──(kali㉿kali)-[~]
+└─$ nmap -sC -sV -p 22,80,46229,50000 10.129.157.89
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-06-22 06:34 EDT
+Nmap scan report for 10.129.157.89
+Host is up (0.037s latency).
+
+PORT      STATE  SERVICE VERSION
+22/tcp    open   ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   3072 fa:6d:30:2f:35:99:47:dc:85:98:63:9e:2f:05:6d:1c (RSA)
+|   256 9c:51:ad:13:f5:f4:2d:86:31:2f:22:fe:8c:c7:b6:36 (ECDSA)
+|_  256 28:cf:0c:59:67:96:3c:36:c3:3c:62:a1:e4:a2:93:88 (ED25519)
+80/tcp    open   http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-title: Maintenance
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+46229/tcp closed unknown
+50000/tcp open   http    Apache Tomcat (language: en)
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-title: TeamCity Maintenance &mdash; TeamCity
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 15.36 seconds
+```
+
 Después de realizar el scan, podemos ver que los puertos `22, 80, 46229 y 50000` están abiertos
+
+Accedemos al puerto `50000` via `http` y nos encontramos con un formulario de acceso de usuario.
+
+![task1-landing_teamcity](./assets/images/task1-landing_teamcity.png)
 
 
