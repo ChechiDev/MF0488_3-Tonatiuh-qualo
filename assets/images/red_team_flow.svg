@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 120 900 100">
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bigGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ===== WIRE ===== -->
+  <line x1="60" y1="160" x2="820" y2="160" stroke="#1a1a28" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Progress line (reveals left to right as spark travels) -->
+  <line x1="60" y1="160" x2="820" y2="160" stroke="#88cc14" stroke-width="3" stroke-linecap="round"
+    stroke-dasharray="760" stroke-dashoffset="760" opacity="0.85">
+    <animate attributeName="stroke-dashoffset" dur="10s" repeatCount="indefinite"
+      values="760;760;0;0;760" keyTimes="0;0.05;0.70;0.9375;1"/>
+  </line>
+  <!-- Glow layer -->
+  <line x1="60" y1="160" x2="820" y2="160" stroke="#88cc14" stroke-width="10" stroke-linecap="round" opacity="0.12"
+    stroke-dasharray="760" stroke-dashoffset="760">
+    <animate attributeName="stroke-dashoffset" dur="10s" repeatCount="indefinite"
+      values="760;760;0;0;760" keyTimes="0;0.05;0.70;0.9375;1"/>
+  </line>
+
+  <!-- ===== TRAVELING SPARK ===== -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;1;1;0;0" keyTimes="0;0.05;0.70;0.71;1"/>
+    <circle r="8" fill="#ffdd00" opacity="0.4" filter="url(#glow)">
+      <animate attributeName="cx" dur="10s" repeatCount="indefinite"
+        values="60;60;820;820;60" keyTimes="0;0.05;0.70;0.9375;1"/>
+      <animate attributeName="cy" dur="10s" repeatCount="indefinite" values="160;160;160;160;160" keyTimes="0;0.05;0.70;0.9375;1"/>
+    </circle>
+    <circle r="4" fill="#fff" opacity="0.95">
+      <animate attributeName="cx" dur="10s" repeatCount="indefinite"
+        values="60;60;820;820;60" keyTimes="0;0.05;0.70;0.9375;1"/>
+      <animate attributeName="cy" dur="10s" repeatCount="indefinite" values="160;160;160;160;160" keyTimes="0;0.05;0.70;0.9375;1"/>
+    </circle>
+  </g>
+
+  <!-- ===== NODE 1: IDENTIFY (x=140, lights at ~12%) ===== -->
+  <!-- Dim state -->
+  <circle cx="140" cy="160" r="25" fill="#0c0c14" stroke="#1a1a28" stroke-width="2.5"/>
+  <g transform="translate(140, 160)">
+    <circle cx="-3" cy="-3" r="8" fill="none" stroke="#2a2a3a" stroke-width="1.5"/>
+    <line x1="3" y1="3" x2="9" y2="9" stroke="#2a2a3a" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <text x="140" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#2a2a3a">IDENTIFY</text>
+
+  <!-- Lit state -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;1;1;0;0" keyTimes="0;0.119;0.12;0.9374;0.9375;1"/>
+    <circle cx="140" cy="160" r="25" fill="#0c1428" stroke="#4488ff" stroke-width="2.5"/>
+    <circle cx="140" cy="160" r="30" fill="none" stroke="#4488ff" stroke-width="0.5" opacity="0.3"/>
+    <g transform="translate(140, 160)">
+      <circle cx="-3" cy="-3" r="8" fill="none" stroke="#4488ff" stroke-width="1.5"/>
+      <line x1="3" y1="3" x2="9" y2="9" stroke="#4488ff" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <text x="140" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#4488ff">IDENTIFY</text>
+  </g>
+  <!-- Pulse ring -->
+  <circle cx="140" cy="160" fill="none" stroke="#4488ff" stroke-width="1.5" opacity="0" r="25">
+    <animate attributeName="r" dur="10s" repeatCount="indefinite"
+      values="25;25;42;42;25" keyTimes="0;0.12;0.165;0.9375;1"/>
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;0.6;0;0" keyTimes="0;0.12;0.125;0.165;1"/>
+  </circle>
+
+  <!-- ===== NODE 2: VALIDATE (x=310, lights at ~26%) ===== -->
+  <!-- Dim state -->
+  <circle cx="310" cy="160" r="25" fill="#0c0c14" stroke="#1a1a28" stroke-width="2.5"/>
+  <g transform="translate(310, 160)">
+    <path d="M0,-10 L9,-5 L9,4 Q9,11 0,13 Q-9,11 -9,4 L-9,-5 Z" fill="none" stroke="#2a2a3a" stroke-width="1.5"/>
+    <path d="M-3.5,1 L-1,4 L4,-2" fill="none" stroke="#2a2a3a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="310" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#2a2a3a">VALIDATE</text>
+
+  <!-- Lit state -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;1;1;0;0" keyTimes="0;0.259;0.26;0.9374;0.9375;1"/>
+    <circle cx="310" cy="160" r="25" fill="#0c1428" stroke="#66aaff" stroke-width="2.5"/>
+    <circle cx="310" cy="160" r="30" fill="none" stroke="#66aaff" stroke-width="0.5" opacity="0.3"/>
+    <g transform="translate(310, 160)">
+      <path d="M0,-10 L9,-5 L9,4 Q9,11 0,13 Q-9,11 -9,4 L-9,-5 Z" fill="none" stroke="#66aaff" stroke-width="1.5"/>
+      <path d="M-3.5,1 L-1,4 L4,-2" fill="none" stroke="#66aaff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="310" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#66aaff">VALIDATE</text>
+  </g>
+  <!-- Pulse ring -->
+  <circle cx="310" cy="160" fill="none" stroke="#66aaff" stroke-width="1.5" opacity="0" r="25">
+    <animate attributeName="r" dur="10s" repeatCount="indefinite"
+      values="25;25;42;42;25" keyTimes="0;0.26;0.305;0.9375;1"/>
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;0.6;0;0" keyTimes="0;0.26;0.265;0.305;1"/>
+  </circle>
+
+  <!-- ===== NODE 3: EXPLOIT (x=480, lights at ~41%) ===== -->
+  <!-- Dim state -->
+  <circle cx="480" cy="160" r="25" fill="#0c0c14" stroke="#1a1a28" stroke-width="2.5"/>
+  <g transform="translate(480, 160)">
+    <path d="M2,-12 L-5,-1 L1,-1 L-2,12 L6,-2 L1,-2 Z" fill="none" stroke="#2a2a3a" stroke-width="1.5" stroke-linejoin="round"/>
+  </g>
+  <text x="480" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#2a2a3a">EXPLOIT</text>
+
+  <!-- Lit state -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;1;1;0;0" keyTimes="0;0.409;0.41;0.9374;0.9375;1"/>
+    <circle cx="480" cy="160" r="25" fill="#1a1008" stroke="#ff8844" stroke-width="2.5"/>
+    <circle cx="480" cy="160" r="30" fill="none" stroke="#ff8844" stroke-width="0.5" opacity="0.3"/>
+    <g transform="translate(480, 160)">
+      <path d="M2,-12 L-5,-1 L1,-1 L-2,12 L6,-2 L1,-2 Z" fill="#ff8844" fill-opacity="0.25" stroke="#ff8844" stroke-width="1.5" stroke-linejoin="round"/>
+    </g>
+    <text x="480" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#ff8844">EXPLOIT</text>
+  </g>
+  <!-- Pulse ring -->
+  <circle cx="480" cy="160" fill="none" stroke="#ff8844" stroke-width="1.5" opacity="0" r="25">
+    <animate attributeName="r" dur="10s" repeatCount="indefinite"
+      values="25;25;42;42;25" keyTimes="0;0.41;0.455;0.9375;1"/>
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;0.6;0;0" keyTimes="0;0.41;0.415;0.455;1"/>
+  </circle>
+
+  <!-- ===== NODE 4: WEAPONISE (x=650, lights at ~55%) ===== -->
+  <!-- Dim state -->
+  <circle cx="650" cy="160" r="25" fill="#0c0c14" stroke="#1a1a28" stroke-width="2.5"/>
+  <g transform="translate(650, 160)">
+    <circle r="10" fill="none" stroke="#2a2a3a" stroke-width="1.5"/>
+    <circle r="4" fill="none" stroke="#2a2a3a" stroke-width="1.2"/>
+    <line x1="-13" y1="0" x2="-6" y2="0" stroke="#2a2a3a" stroke-width="1.2"/>
+    <line x1="6" y1="0" x2="13" y2="0" stroke="#2a2a3a" stroke-width="1.2"/>
+    <line x1="0" y1="-13" x2="0" y2="-6" stroke="#2a2a3a" stroke-width="1.2"/>
+    <line x1="0" y1="6" x2="0" y2="13" stroke="#2a2a3a" stroke-width="1.2"/>
+  </g>
+  <text x="650" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#2a2a3a">WEAPONISE</text>
+
+  <!-- Lit state -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;1;1;0;0" keyTimes="0;0.554;0.555;0.9374;0.9375;1"/>
+    <circle cx="650" cy="160" r="25" fill="#1a0a10" stroke="#ff4444" stroke-width="2.5"/>
+    <circle cx="650" cy="160" r="30" fill="none" stroke="#ff4444" stroke-width="0.5" opacity="0.3"/>
+    <g transform="translate(650, 160)">
+      <circle r="10" fill="none" stroke="#ff4444" stroke-width="1.5"/>
+      <circle r="3" fill="#ff4444"/>
+      <line x1="-13" y1="0" x2="-6" y2="0" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="6" y1="0" x2="13" y2="0" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="0" y1="-13" x2="0" y2="-6" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="0" y1="6" x2="0" y2="13" stroke="#ff4444" stroke-width="1.5" stroke-linecap="round"/>
+    </g>
+    <text x="650" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#ff4444">WEAPONISE</text>
+  </g>
+  <!-- Pulse ring -->
+  <circle cx="650" cy="160" fill="none" stroke="#ff4444" stroke-width="1.5" opacity="0" r="25">
+    <animate attributeName="r" dur="10s" repeatCount="indefinite"
+      values="25;25;42;42;25" keyTimes="0;0.555;0.60;0.9375;1"/>
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;0.6;0;0" keyTimes="0;0.555;0.56;0.60;1"/>
+  </circle>
+
+  <!-- ===== NODE 5: EVIDENCE (x=820, lights at ~70%) ===== -->
+  <!-- Dim state -->
+  <circle cx="820" cy="160" r="25" fill="#0c0c14" stroke="#1a1a28" stroke-width="2.5"/>
+  <g transform="translate(820, 160)">
+    <rect x="-8" y="-10" width="16" height="20" rx="2" fill="none" stroke="#2a2a3a" stroke-width="1.5"/>
+    <rect x="-4" y="-13" width="8" height="5" rx="1" fill="none" stroke="#2a2a3a" stroke-width="1.2"/>
+    <line x1="-4" y1="-3" x2="4" y2="-3" stroke="#2a2a3a" stroke-width="1"/>
+    <line x1="-4" y1="2" x2="4" y2="2" stroke="#2a2a3a" stroke-width="1"/>
+    <line x1="-4" y1="7" x2="2" y2="7" stroke="#2a2a3a" stroke-width="1"/>
+  </g>
+  <text x="820" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#2a2a3a">EVIDENCE</text>
+
+  <!-- Lit state -->
+  <g opacity="0">
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;1;1;0;0" keyTimes="0;0.699;0.70;0.9374;0.9375;1"/>
+    <circle cx="820" cy="160" r="25" fill="#0a1608" stroke="#88cc14" stroke-width="2.5"/>
+    <circle cx="820" cy="160" r="30" fill="none" stroke="#88cc14" stroke-width="0.5" opacity="0.3"/>
+    <g transform="translate(820, 160)">
+      <rect x="-8" y="-10" width="16" height="20" rx="2" fill="none" stroke="#88cc14" stroke-width="1.5"/>
+      <rect x="-4" y="-13" width="8" height="5" rx="1" fill="#88cc14" fill-opacity="0.25" stroke="#88cc14" stroke-width="1.2"/>
+      <line x1="-4" y1="-3" x2="4" y2="-3" stroke="#88cc14" stroke-width="1"/>
+      <path d="M-4,3 L-1,6 L4,0" fill="none" stroke="#88cc14" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="820" y="204" text-anchor="middle" font-family="Consolas, monospace" font-size="9" fill="#88cc14" font-weight="bold">EVIDENCE</text>
+  </g>
+  <!-- Success burst -->
+  <g opacity="0" transform="translate(820, 160)">
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;0.8;0;0" keyTimes="0;0.70;0.72;0.78;1"/>
+    <circle r="20" fill="#88cc14" opacity="0.15" filter="url(#bigGlow)"/>
+    <line x1="0" y1="-18" x2="0" y2="-28" stroke="#88cc14" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="0" y1="18" x2="0" y2="28" stroke="#88cc14" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+    <line x1="-18" y1="0" x2="-28" y2="0" stroke="#88cc14" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="18" y1="0" x2="28" y2="0" stroke="#88cc14" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+    <line x1="-13" y1="-13" x2="-21" y2="-21" stroke="#88cc14" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+    <line x1="13" y1="-13" x2="21" y2="-21" stroke="#88cc14" stroke-width="1.2" stroke-linecap="round" opacity="0.6"/>
+    <line x1="-13" y1="13" x2="-21" y2="21" stroke="#88cc14" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+    <line x1="13" y1="13" x2="21" y2="21" stroke="#88cc14" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+  </g>
+  <!-- Pulse ring -->
+  <circle cx="820" cy="160" fill="none" stroke="#88cc14" stroke-width="1.5" opacity="0" r="25">
+    <animate attributeName="r" dur="10s" repeatCount="indefinite"
+      values="25;25;42;42;25" keyTimes="0;0.70;0.745;0.9375;1"/>
+    <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+      values="0;0;0.6;0;0" keyTimes="0;0.70;0.705;0.745;1"/>
+  </circle>
+</svg>
