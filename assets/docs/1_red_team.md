@@ -20,4 +20,44 @@ Un atacante silencioso no deja notas, pero un buen auditor documenta cada paso.
 
 ---
 
+## Red Team
+
+Establecemos conexión con la **VM** de **THM**, que en este caso nos da la **IP** `10.130.185.84`
+
+Comprobamos conexión:
+
+```bash
+┌──(kali㉿kali)-[~]
+└─$ ping -c 4 10.130.185.84                     
+PING 10.130.185.84 (10.130.185.84) 56(84) bytes of data.
+64 bytes from 10.130.185.84: icmp_seq=1 ttl=62 time=39.2 ms
+64 bytes from 10.130.185.84: icmp_seq=2 ttl=62 time=31.8 ms
+64 bytes from 10.130.185.84: icmp_seq=3 ttl=62 time=32.6 ms
+64 bytes from 10.130.185.84: icmp_seq=4 ttl=62 time=31.8 ms
+
+--- 10.130.185.84 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3004ms
+rtt min/avg/max/mdev = 31.775/33.830/39.177/3.102 ms
+```
+
+Realizamos un scan con `Nmap` para ver qué servicios y puertos estan abiertos.
+
+```bash
+┌──(kali㉿kali)-[~]
+└─$ nmap -sS -p- 10.130.185.84
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-06-22 04:55 EDT
+Nmap scan report for 10.130.185.84
+Host is up (0.036s latency).
+Not shown: 65531 closed tcp ports (reset)
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+46229/tcp open  unknown
+50000/tcp open  ibm-db2
+
+Nmap done: 1 IP address (1 host up) scanned in 33.70 seconds
+```
+
+Después de realizar el scan, podemos ver que los puertos `22, 80, 46229 y 50000` están abiertos
+
 
