@@ -112,8 +112,8 @@ Se han identificado dos vulnerabilidades críticas publicadas en marzo de 2024:
 
 | CVE | Tipo | CVSS | Descripción |
 |-----|------|------|-------------|
-| ![CVE-2024-27198](https://www.incibe.es/en/incibe-cert/early-warning/vulnerabilities/cve-2024-27198) | Authentication Bypass | 9.8 | Acceso administrativo sin credenciales |
-| ![CVE-2024-27199](https://nvd.nist.gov/vuln/detail/cve-2024-27199) | Path Traversal | 7.3 | Acceso a rutas restringidas del servidor |
+| [CVE-2024-27198](https://www.incibe.es/en/incibe-cert/early-warning/vulnerabilities/cve-2024-27198) | Authentication Bypass | 9.8 | Acceso administrativo sin credenciales |
+| [CVE-2024-27199](https://nvd.nist.gov/vuln/detail/cve-2024-27199) | Path Traversal | 7.3 | Acceso a rutas restringidas del servidor |
 
 Ambas afectan a versiones anteriores a **2023.11.4**. Nuestro target (2023.11.3) es vulnerable.
 
