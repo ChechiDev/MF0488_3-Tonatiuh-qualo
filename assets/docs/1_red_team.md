@@ -58,6 +58,8 @@ PORT      STATE SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 26.54 seconds
 ```
 
+**Scan profundo**: Para detección de versiones y scripts:
+
 ```bash
 ┌──(kali㉿kali)-[~]
 └─$ nmap -sC -sV -p- 10.129.157.89
@@ -84,10 +86,21 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 48.81 seconds
 ```
 
-Después de realizar el scan, podemos ver que los puertos `22, 80, 44053 y 50000` están abiertos
+Después de realizar el scan, podemos ver:
 
-Accedemos al puerto `50000` via `http` y nos encontramos con un formulario de acceso de usuario.
+| Puerto | Estado | Servicio | Versión |
+|--------|--------|----------|---------|
+| 22     | open   | ssh      | OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 |
+| 80     | open   | http     | Apache httpd 2.4.41 |
+| 44053  | open   | java-rmi | Java RMI (comunicación interna TeamCity) |
+| 50000  | open   | http     | Apache Tomcat  **TeamCity** |
+
+- **Puerto 80**: Página estática de mantenimiento y sin contenido.
+- **Puerto 50000**: Panel de login de **JetBrains TeamCity**.
+
+Accedemos al puerto `50000` via `http`:
 
 ![task1-landing_teamcity](./assets/images/task1-landing_teamcity.png)
 
+Versión identificada en **TeamCity 2023.11.3 (build 147512)**
 
