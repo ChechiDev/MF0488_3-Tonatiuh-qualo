@@ -153,6 +153,25 @@ Después de realizar el scan, podemos ver:
 - **Puerto 80**: Página estática de mantenimiento y sin contenido.
 - **Puerto 50000**: Panel de login de **JetBrains TeamCity**.
 
+### Posibles vectores de ataque
+
+```mermaid
+flowchart TD
+    A[Target: 10.129.157.89] --> P22[Puerto 22 - SSH]
+    A --> P80[Puerto 80 - HTTP]
+    A --> P44053[Puerto 44053 - Java RMI]
+    A --> P50000[Puerto 50000 - TeamCity]
+
+    P22 --> V1[Vector: Credenciales]
+    P80 --> V2[Vector: Web]
+    P44053 --> V3[Vector: Java-RMI]
+    P50000 --> V4[Vector: CVE-2024-27198 / CVE-2024-27199]
+```
+
+Ahora que tenemos identificados los puertos y sus posibles vectores de ataque, podríamos intentar la explotación por cualquiera de ellos.
+
+Comenzaremos por el **puerto 50000 (TeamCity)**, el resto de vectores (SSH, HTTP y RMI) los analizaremos más adelante.
+
 Accedemos al puerto `50000` via `http`:
 
 ![task1-landing_teamcity](./assets/images/task1-landing_teamcity.png)
@@ -173,6 +192,7 @@ Se han identificado dos vulnerabilidades críticas publicadas en marzo de 2024:
 Ambas afectan a versiones anteriores a **2023.11.4**. Nuestro target (2023.11.3) es vulnerable.
 
 Vector de ataque seleccionado: **CVE-2024-27198**: Permite control total sobre TeamCity sin autenticación.
+
 
 
 
