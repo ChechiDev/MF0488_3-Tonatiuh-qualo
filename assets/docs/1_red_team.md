@@ -5,6 +5,9 @@ Para atrapar a un cibercriminal, primero debes entender cómo opera. La direcci�
 Durante esta fase, dejarás temporalmente tu puesto en el **SOC**, te pondrás el "sombrero negro" y actuarás como el atacante. Vamos a recrear la intrusión para descubrir de primera mano las debilidades estructurales del sistema.
 
 ![red_team_flow](./assets/images/red_team_flow.svg)
+<p align="center">
+  <img src="./assets/images/red_team_flow.svg" alt="red_team_flow" width="400">
+</p>
 
 ## Objetivo Final
 
