@@ -6,7 +6,7 @@ Durante esta fase, dejarás temporalmente tu puesto en el **SOC**, te pondrás e
 
 ![red_team_flow](./assets/images/red_team_flow.svg)
 <p align="center">
-  <img src="./assets/images/red_team_flow.svg" alt="red_team_flow" width="400">
+  <img src="./assets/images/red_team_flow.svg" alt="red_team_flow" width="800">
 </p>
 
 ## Objetivo Final
