@@ -1,6 +1,8 @@
 # Analizando el incidente
 
-![analizando](./assets/images/analizando.png)
+<p align="center">
+  <img src="./assets/images/analizando.png" alt="analizando" width="400">
+</p>
 
 ## El cambio de rol: De vuelta al SOC
 
