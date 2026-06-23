@@ -2,7 +2,9 @@
 
 Trabajas como Analista de Ciberseguridad (Respuesta a Incidentes) en el Centro de Operaciones de Seguridad (SOC) de Tonatiuh qualo, un Proveedor de Servicios de Seguridad Gestionados (MSSP) de primer nivel. Tu equipo se encarga de monitorizar, detectar y responder a las ciberamenazas que acechan a la infraestructura de sus clientes.
 
-![ir_lifecycle](./assets/images/ir_lifecycle.svg)
+<p align="center">
+  <img src="./assets/images/ir_lifecycle.png" alt="ir_lifecycle" width="400">
+</p>
 
 Esta mañana, tu gerente de incidentes te ha asignado un ticket de máxima prioridad. El departamento de IT de uno de sus clientes principales ha enviado una solicitud urgente de investigación tras detectar anomalías en uno de sus servidores críticos.
 
@@ -62,6 +64,9 @@ Para atrapar a un cibercriminal, primero debes entender cómo opera. La direcci�
 Durante esta fase, dejarás temporalmente tu puesto en el **SOC**, te pondrás el "sombrero negro" y actuarás como el atacante. Vamos a recrear la intrusión para descubrir de primera mano las debilidades estructurales del sistema.
 
 ![red_team_flow](./assets/images/red_team_flow.svg)
+<p align="center">
+  <img src="./assets/images/red_team_flow.svg" alt="red_team_flow" width="400">
+</p>
 
 ## Objetivo Final
 
