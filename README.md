@@ -144,7 +144,7 @@ Nmap done: 1 IP address (1 host up) scanned in 48.81 seconds
 Después de realizar el scan, podemos ver:
 
 | Puerto | Estado | Servicio | Versión |
-|--------|--------|----------|---------|
+| :---: | :---: | :---: | :--- |
 | 22     | open   | ssh      | OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 |
 | 80     | open   | http     | Apache httpd 2.4.41 |
 | 44053  | open   | java-rmi | Java RMI (comunicación interna TeamCity) |
@@ -185,7 +185,7 @@ Investigamos las posibles CVE asociadas a **TeamCity 2023.11.3**.
 Se han identificado dos vulnerabilidades críticas publicadas en marzo de 2024:
 
 | CVE | Tipo | CVSS | Descripción |
-|-----|------|------|-------------|
+| :---: | :--- | :---: | :--- |
 | [CVE-2024-27198](https://www.incibe.es/en/incibe-cert/early-warning/vulnerabilities/cve-2024-27198) | Authentication Bypass | 9.8 | Acceso administrativo sin credenciales |
 | [CVE-2024-27199](https://nvd.nist.gov/vuln/detail/cve-2024-27199) | Path Traversal | 7.3 | Acceso a rutas restringidas del servidor |
 
