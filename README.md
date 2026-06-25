@@ -513,7 +513,7 @@ En esta tarea, tu objetivo es realizar la correlación de eventos. Debes rastrea
 
 ---
 
-## detección
+## Detección
 
 1. ¿Cómo se llama el usuario que se creó durante la explotación?
 
