@@ -22,9 +22,7 @@ Nos conectamos a `splunk` vía: `http://10.128.176.37:8000/`
 
 Realizamos una primera búsqueda total de todos los registros dentro de `splunk´
 
-<p align="center">
-  <img src="./assets/images/splunk-hostname.png" alt="splunk-hostname" width="400">
-</p>
+![splunk-hostname](./assets/images/splunk-hostname.png)
 
 Vemos que el hostname es `brains`
 
@@ -32,9 +30,7 @@ Vemos que el hostname es `brains`
 
 Para contar cuantos `sourcetype` tenemos, filtramos con: `index=* | stats count by sourcetype`
 
-<p align="center">
-  <img src="./assets/images/splunk-sourcetype_count.png" alt="splunk-sourcetype_count" width="400">
-</p>
+![splunk-sourcetype_count](./assets/images/splunk-sourcetype_count.png)
 
 Como se ve en la imagen tenemos `3 sourcetype`
 
@@ -48,9 +44,7 @@ Para filtrar por logs por el año utilizaremos el método **strftime**: `index=*
 
 Una vez tenemos filtado por año, usamos el método **count** para contar cuantos eventos existen.
 
-<p align="center">
-  <img src="./assets/images/splunk-year_count.png" alt="splunk-year_count" width="400">
-</p>
+![splunk-year_count](./assets/images/splunk-year_count.png)
 
 Vamos que el año con más eventos totales es: `2024`
 
