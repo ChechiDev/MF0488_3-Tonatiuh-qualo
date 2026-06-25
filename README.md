@@ -459,6 +459,27 @@ Para esta primera fase de respuesta a incidentes, el cliente nos ha dado acceso 
 
 ---
 
+## Análisis 
+
+1. ¿Cómo se llama el host que se está analizando?
+
+
+
+2. ¿Cuántos `sourcetype` de los logs se están analizando?
+
+
+
+3. ¿Cuántos eventos generó el `sourcetype` que más eventos tiene?
+
+
+
+4. ¿En que año se generaron más eventos?
+
+
+
+5. ¿Cuantos eventos se generaron en ese año?
+
+
 
 ---
 
