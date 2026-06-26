@@ -549,11 +549,11 @@ Extraemos la fecha de cuando se creó: `Jul  4 22:32:37`
 
 3. ¿Cuál es su `punct`?
 
-
+Extraemos el punct: `___::__[]:__:_=,_=,_=,_=//,_=//,_=///`
 
 4. ¿Qué tipo de shell se creó?
 
-
+En la misma captura del evento, extraemos la shell que se ha creaado: `shell=/bin/bash`
 
 5. ¿Cuál es el nombre del paquete malicioso instalado en el servidor?
 
