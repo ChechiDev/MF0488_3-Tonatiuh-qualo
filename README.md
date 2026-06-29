@@ -614,15 +614,15 @@ En la misma búsqueda anterior podemos extraer la public key `ecXxIHdpi9cpIPbjew
 | **Proyecto** | Auditoría integral - Operación Eclipse |
 | **Fecha Emisión** | 01/07/2026 |
 | **Auditor Jefe** | Sergi Pérez |
-| **Clasificación** | <span style="color:orange; font-size:14px; font-weight:bold">CONFIDENCIAL</span> |
+| **Clasificación** | **CONFIDENCIAL** |
 
 ## 1.2 Resumen Ejecutivo
 
-Tras la investigación realizada por el equipo de respuesta de incidentes **Tonatiuh Qualo**, la postura de seguridad de **Nebula Inc.** se clasifica como <span style="color:red; font-size:12px; font-weight:bold">CRÍTICA</span>.
+Tras la investigación realizada por el equipo de respuesta de incidentes **Tonatiuh Qualo**, la postura de seguridad de **Nebula Inc.** se clasifica como **CRÍTICA**.
 
 Se ha confirmado que, un atacante externo accedió al servidor de producción sin credenciales, escaló privilegios al máximo nivel e instaló mecanismos de acceso persistente, sin que los sistemas internos de la organización generasen alguna alerta.
 
-Se han identificado **4 hallazgos de riesgo** <span style="color:red; font-size:12px; font-weight:bold">CRÍTICO</span> a partir del análisis de 4100 eventos en el **SIEM (Splunk)**. El ataque ha sido reconstruido en su totalidad, desde el vector de entrada inicial hasta la exfiltración de datos confirmado.
+Se han identificado **4 hallazgos de riesg CRÍTICO** a partir del análisis de 4100 eventos en el **SIEM (Splunk)**. El ataque ha sido reconstruido en su totalidad, desde el vector de entrada inicial hasta la exfiltración de datos confirmado.
 
 De no actuar ante estos hallazgos, **Nebula Inc.** se expone a un impacto combinado sobre tres ámbitos: 
 
@@ -661,7 +661,7 @@ Estos 3 riesgos, se retroalimentan entre sí y requieren de actuación inmediata
 
 ### Hallazgo 1: Aplicación crítica expuesta a Internet sin actualizaciones
 
-**Nivel de Riesgo**: <span style="color:red; font-size:16px; font-weight:bold">CRÍTICO</span> **(CVSS 9.8)**
+**Nivel de Riesgo**: **CRÍTICO (CVSS 9.8)**
 
 El servidor de producción utiliza una versión obsoleta de la plataforma *JetBrains TeamCity*, accesible directamente desde internet. Esta versión contiene un fallo de seguridad conocido **(CVE-2024-27198)** que permite acceder como administrador sin necesidad de usuario y password. El fabricante publicó la corrección en marzo de 2024 pero en el momento del incidente (julio 2024) aún no se había aplicado.
 
@@ -680,7 +680,7 @@ El servidor de producción utiliza una versión obsoleta de la plataforma *JetBr
 
 ### Hallazgo-2: Privilegios de administración excesivos en cuenta de servicio
 
-**Nivel de Riesgo**: <span style="color:red; font-size:16px; font-weight:bold">CRÍTICO</span>
+**Nivel de Riesgo**: **CRÍTICO**
 
 La cuenta de usuario del sistema operativo bajo la que se ejecuta **TeamCity** `(ubuntu)` tiene permisos para realizar cualquier acción como administrador `(root)` sin necesidad de introducir el password. Esto significa que cualquier atacante que consiga acceso al servidor con este usuario, obtiene automáticamente el control absoluto del sistema operativo sin ningún obstáculo adicional.
 
