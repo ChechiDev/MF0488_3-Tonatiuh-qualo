@@ -616,6 +616,10 @@ En la misma búsqueda anterior podemos extraer la public key `ecXxIHdpi9cpIPbjew
 | **Auditor Jefe** | Sergi Pérez |
 | **Clasificación** | **CONFIDENCIAL** |
 
+<p align="center">
+  <img src="./assets/images/logo-tonatiuh.png" alt="logo-tonatiuh" width="600">
+</p>
+
 ## 1.2 Resumen Ejecutivo
 
 Tras la investigación realizada por el equipo de respuesta de incidentes **Tonatiuh Qualo**, la postura de seguridad de **Nebula Inc.** se clasifica como **CRÍTICA**.
