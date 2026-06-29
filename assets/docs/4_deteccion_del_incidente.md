@@ -54,26 +54,44 @@ En la misma captura del evento, extraemos la shell que se ha creaado: `shell=/bi
 
 5. ¿Cuál es el nombre del paquete malicioso instalado en el servidor?
 
+Filtramos por el estado de `status installed` para ver los paquetes instalados y luego filtramos por la fecha del evento, que cómo hemos visto antes es el `Jul  4`
 
+<p align="center">
+  <img src="./assets/images/splunk-datacollector.png" alt="splunk-datacollector" width="600">
+</p>
 
 6. ¿Cuál es la versión del paquete?
 
-
+En la misma captura anterior podemos extraer también la versión del paquete: `amd64 1.0`
 
 7. ¿A qué hora se emepzó a instalar el paquete?
 
+<p align="center">
+  <img src="./assets/images/splunk-install.png" alt="splunk-install" width="600">
+</p>
 
+El paquete se empezó a instalar a las: `22:58:23'
 
 8. ¿Cuál es el nombre del plugin que se instaló?
 
+<p align="center">
+  <img src="./assets/images/splunk-plugin.png" alt="splunk-plugin" width="600">
+</p>
 
+Cómo se puede ver el plugin se llama `AyzzbuXY`
 
 9. ¿Cuál es el source del evento del plugin?
 
-
+El source es: `/opt/teamcity/TeamCity/logs/teamcity-activities.log`
 
 10. ¿Desde que IP entró el atacante?
 
+En este caso probamos a filtrar por el protocolo `ssh` para ver si existe una posible conexión 
 
+<p align="center">
+  <img src="./assets/images/splunk-ip.png" alt="splunk-ip" width="600">
+</p>
 
 11. ¿Cuál es la Public Key por la que accedió el atacante?
+
+En la misma búsqueda anterior podemos extraer la public key `ecXxIHdpi9cpIPbjewybKqpDqrM1bw/OlKeuDT6rmzc`
