@@ -18,7 +18,7 @@ Para esta primera fase de respuesta a incidentes, el cliente nos ha dado acceso 
 
 Nos conectamos a `splunk` vía: `http://10.128.176.37:8000/` 
 
-1. ¿Cómo se llama el host que se está analizando?
+1\. ¿Cómo se llama el host que se está analizando?
 
 Realizamos una primera búsqueda total de todos los registros dentro de `splunk´
 
@@ -26,7 +26,7 @@ Realizamos una primera búsqueda total de todos los registros dentro de `splunk�
 
 Vemos que el hostname es `brains`
 
-2. ¿Cuántos `sourcetype` de los logs se están analizando?
+2\. ¿Cuántos `sourcetype` de los logs se están analizando?
 
 Para contar cuantos `sourcetype` tenemos, filtramos con: `index=* | stats count by sourcetype`
 
@@ -34,11 +34,11 @@ Para contar cuantos `sourcetype` tenemos, filtramos con: `index=* | stats count 
 
 Como se ve en la imagen tenemos `3 sourcetype`
 
-3. ¿Cuántos eventos generó el `sourcetype` que más eventos tiene?
+3\. ¿Cuántos eventos generó el `sourcetype` que más eventos tiene?
 
 Aprovechando la imagen anterior, vemos que el máximo de eventos que generó el `sourcetype` son: `3.816`
 
-4. ¿En que año se generaron más eventos?
+4\. ¿En que año se generaron más eventos?
 
 Para filtrar por logs por el año utilizaremos el método **strftime**: `index=* | eval year=strftime(_time, "%Y") | stats count by year`
 
@@ -48,6 +48,6 @@ Una vez tenemos filtado por año, usamos el método **count** para contar cuanto
 
 Vamos que el año con más eventos totales es: `2024`
 
-5. ¿Cuantos eventos se generaron en ese año?
+5\. ¿Cuantos eventos se generaron en ese año?
 
 Aprovechando la misma imagen y filtro, vamos que los eventos totales para el año **2024** es: `4.109`
