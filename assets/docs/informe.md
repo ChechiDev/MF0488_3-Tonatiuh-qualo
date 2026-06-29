@@ -1,5 +1,9 @@
 # Informe Final Auditoría de Seguridad
 
+<p align="center">
+  <img src="./assets/images/logo-tonatiuh.png" alt="logo-tonatiuh" width="300">
+</p>
+
 ## 1.1 Datos del Proyecto
 
 | Campo | Detalle |
@@ -10,10 +14,6 @@
 | **Fecha Emisión** | 01/07/2026 |
 | **Auditor Jefe** | Sergi Pérez |
 | **Clasificación** | **CONFIDENCIAL** |
-
-<p align="center">
-  <img src="./assets/images/logo-tonatiuh.png" alt="logo-tonatiuh" width="600">
-</p>
 
 ## 1.2 Resumen Ejecutivo
 
