@@ -1,4 +1,4 @@
-# Blue Team
+# 3. Blue Team
 
 Esta mañana, tu gerente de incidentes te ha asignado un ticket de máxima prioridad. El departamento de IT de uno de sus clientes principales ha enviado una solicitud urgente de investigación tras detectar anomalías en uno de sus servidores críticos.
 

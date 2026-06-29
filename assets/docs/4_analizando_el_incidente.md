@@ -1,4 +1,4 @@
-# Analizando el incidente
+# 4. Analizando el incidente
 
 <p align="center">
   <img src="./assets/images/analizando.png" alt="analizando" width="400">
