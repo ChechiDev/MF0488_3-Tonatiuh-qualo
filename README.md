@@ -465,7 +465,7 @@ Para esta primera fase de respuesta a incidentes, el cliente nos ha dado acceso 
 
 Nos conectamos a `splunk` vía: `http://10.128.176.37:8000/` 
 
-1. ¿Cómo se llama el host que se está analizando?
+1\. ¿Cómo se llama el host que se está analizando?
 
 Realizamos una primera búsqueda total de todos los registros dentro de `splunk´
 
@@ -473,7 +473,7 @@ Realizamos una primera búsqueda total de todos los registros dentro de `splunk�
 
 Vemos que el hostname es `brains`
 
-2. ¿Cuántos `sourcetype` de los logs se están analizando?
+2\. ¿Cuántos `sourcetype` de los logs se están analizando?
 
 Para contar cuantos `sourcetype` tenemos, filtramos con: `index=* | stats count by sourcetype`
 
@@ -481,11 +481,11 @@ Para contar cuantos `sourcetype` tenemos, filtramos con: `index=* | stats count 
 
 Como se ve en la imagen tenemos `3 sourcetype`
 
-3. ¿Cuántos eventos generó el `sourcetype` que más eventos tiene?
+3\. ¿Cuántos eventos generó el `sourcetype` que más eventos tiene?
 
 Aprovechando la imagen anterior, vemos que el máximo de eventos que generó el `sourcetype` son: `3.816`
 
-4. ¿En que año se generaron más eventos?
+4\. ¿En que año se generaron más eventos?
 
 Para filtrar por logs por el año utilizaremos el método **strftime**: `index=* | eval year=strftime(_time, "%Y") | stats count by year`
 
@@ -495,7 +495,7 @@ Una vez tenemos filtado por año, usamos el método **count** para contar cuanto
 
 Vamos que el año con más eventos totales es: `2024`
 
-5. ¿Cuantos eventos se generaron en ese año?
+5\. ¿Cuantos eventos se generaron en ese año?
 
 Aprovechando la misma imagen y filtro, vamos que los eventos totales para el año **2024** es: `4.109`
 
@@ -520,7 +520,7 @@ En esta tarea, tu objetivo es realizar la correlación de eventos. Debes rastrea
 
 ## Detección
 
-1. ¿Cómo se llama el usuario que se creó durante la explotación?
+1\. ¿Cómo se llama el usuario que se creó durante la explotación?
 
 Realizamos una primera búsqueda sobre los eventos en `splunk` para buscar el user: `index=* *new user*`
 
@@ -538,7 +538,7 @@ Pero con la anterior búsqueda, no hemos obtenido aún el nombre del usuario cre
 
 Hemos encontrado el usuario creado: `eviluser`
 
-2. ¿Cuándo se creó el usuario?
+2\. ¿Cuándo se creó el usuario?
 
 Accedemos a la información del evento:
 
@@ -548,7 +548,7 @@ Accedemos a la información del evento:
 
 Extraemos la fecha de cuando se creó: `Jul  4 22:32:37` 
 
-3. ¿Cuál es su `punct`?
+3\. ¿Cuál es su `punct`?
 
 Extraemos el punct: `___::__[]:__:_=,_=,_=,_=//,_=//,_=///`
 
@@ -556,7 +556,7 @@ Extraemos el punct: `___::__[]:__:_=,_=,_=,_=//,_=//,_=///`
 
 En la misma captura del evento, extraemos la shell que se ha creaado: `shell=/bin/bash`
 
-5. ¿Cuál es el nombre del paquete malicioso instalado en el servidor?
+5\. ¿Cuál es el nombre del paquete malicioso instalado en el servidor?
 
 Filtramos por el estado de `status installed` para ver los paquetes instalados y luego filtramos por la fecha del evento, que cómo hemos visto antes es el `Jul  4`
 
@@ -564,11 +564,11 @@ Filtramos por el estado de `status installed` para ver los paquetes instalados y
   <img src="./assets/images/splunk-datacollector.png" alt="splunk-datacollector" width="600">
 </p>
 
-6. ¿Cuál es la versión del paquete?
+6\. ¿Cuál es la versión del paquete?
 
 En la misma captura anterior podemos extraer también la versión del paquete: `amd64 1.0`
 
-7. ¿A qué hora se emepzó a instalar el paquete?
+7\. ¿A qué hora se emepzó a instalar el paquete?
 
 <p align="center">
   <img src="./assets/images/splunk-install.png" alt="splunk-install" width="600">
@@ -576,7 +576,7 @@ En la misma captura anterior podemos extraer también la versión del paquete: `
 
 El paquete se empezó a instalar a las: `22:58:23'
 
-8. ¿Cuál es el nombre del plugin que se instaló?
+8\. ¿Cuál es el nombre del plugin que se instaló?
 
 <p align="center">
   <img src="./assets/images/splunk-plugin.png" alt="splunk-plugin" width="600">
@@ -584,11 +584,11 @@ El paquete se empezó a instalar a las: `22:58:23'
 
 Cómo se puede ver el plugin se llama `AyzzbuXY`
 
-9. ¿Cuál es el source del evento del plugin?
+9\. ¿Cuál es el source del evento del plugin?
 
 El source es: `/opt/teamcity/TeamCity/logs/teamcity-activities.log`
 
-10. ¿Desde que IP entró el atacante?
+10\. ¿Desde que IP entró el atacante?
 
 En este caso probamos a filtrar por el protocolo `ssh` para ver si existe una posible conexión 
 
@@ -596,7 +596,7 @@ En este caso probamos a filtrar por el protocolo `ssh` para ver si existe una po
   <img src="./assets/images/splunk-ip.png" alt="splunk-ip" width="600">
 </p>
 
-11. ¿Cuál es la Public Key por la que accedió el atacante?
+11\. ¿Cuál es la Public Key por la que accedió el atacante?
 
 En la misma búsqueda anterior podemos extraer la public key `ecXxIHdpi9cpIPbjewybKqpDqrM1bw/OlKeuDT6rmzc`
 
