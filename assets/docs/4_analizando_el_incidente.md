@@ -1,7 +1,7 @@
 # Analizando el incidente
 
 <p align="center">
-  <img src="./assets/images/analizando.png" alt="analizando" width="400">
+  <img src="./assets/images/analizando.png" alt="analizando" width="600">
 </p>
 
 ## El cambio de rol: De vuelta al SOC
