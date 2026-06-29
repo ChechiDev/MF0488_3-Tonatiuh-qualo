@@ -53,7 +53,7 @@ hxxps[://]tryhackme[.]com/jr/25FOAP7810195046037_Tonatiuh_qualo_mf0488
 ## Contenido
 - [2. Red Team](#2-red-team)
 - [3. Blue Team](#3-blue-team)
-- [4. Analizando el incidente](#4-analizando-el-incidente)
+- [Analizando el incidente](#analizando-el-incidente)
 - [5. Detección del incidente](#5-detección-del-incidente)
 - [Informe Final Auditoría de Seguridad](#informe-final-auditoría-de-seguridad)
 
@@ -445,7 +445,7 @@ Connection via: http://MACHINE_IP:8000
 
 ---
 
-# 4. Analizando el incidente
+# Analizando el incidente
 
 <p align="center">
   <img src="./assets/images/analizando.png" alt="analizando" width="400">
@@ -467,11 +467,13 @@ Nos conectamos a `splunk` vía: `http://10.128.176.37:8000/`
 
 1. ¿Cómo se llama el host que se está analizando?
 
+<div style="border-left: 3px solid #444444; padding-left: 12px;">
 Realizamos una primera búsqueda total de todos los registros dentro de `splunk´
 
-![splunk-hostname](./assets/images/splunk-hostname.png)
+[splunk-hostname](./assets/images/splunk-hostname.png)
 
 Vemos que el hostname es `brains`
+</div>
 
 2. ¿Cuántos `sourcetype` de los logs se están analizando?
 
