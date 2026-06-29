@@ -448,7 +448,7 @@ Connection via: http://MACHINE_IP:8000
 # Analizando el incidente
 
 <p align="center">
-  <img src="./assets/images/analizando.png" alt="analizando" width="400">
+  <img src="./assets/images/analizando.png" alt="analizando" width="600">
 </p>
 
 ## El cambio de rol: De vuelta al SOC
@@ -505,7 +505,7 @@ Aprovechando la misma imagen y filtro, vamos que los eventos totales para el añ
 # 5. Detección del incidente
 
 <p align="center">
-  <img src="./assets/images/analizando.png" alt="analizando" width="400">
+  <img src="./assets/images/analizando.png" alt="analizando" width="600">
 </p>
 
 ## Reconstruyendo la Kill Chain
