@@ -22,7 +22,7 @@ Nos conectamos a `splunk` vía: `http://10.128.176.37:8000/`
 
 Realizamos una primera búsqueda total de todos los registros dentro de `splunk´
 
-[splunk-hostname](./assets/images/splunk-hostname.png)
+![splunk-hostname](./assets/images/splunk-hostname.png)
 
 Vemos que el hostname es `brains`
 
