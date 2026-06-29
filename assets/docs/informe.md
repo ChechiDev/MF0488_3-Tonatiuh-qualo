@@ -91,5 +91,3 @@ La cuenta de usuario del sistema operativo bajo la que se ejecuta **TeamCity** `
 
 1. **Contención inmediata**: Eliminar los permisos `NOPASSWD: ALL` de la cuenta `ubuntu`. Restringir sus privilegios exclusivamente a los comandos necesarios para operar **TeamCity**.
 2. **Acción definitiva**: Implantar una política de mínimo privilegio en todos los servidores. Realizar auditorías trimestrales o mensuales de los permisos de las cuentas del sistema y registrar toda elevación de privilegios en el **SIEM** para su monitorización.
-
----
