@@ -659,7 +659,7 @@ Estos 3 riesgos, se retroalimentan entre sí y requieren de actuación inmediata
 | **Nmap** | Reconocimiento activo de ataque (puertos, servicios y versiones) |
 | **Metasploit/Meterpeter** | Emulación del vector de ataque original |
 
-## 1.4 Hallazgo
+## 1.4 Hallazgos
 
 ### Hallazgo 1: Aplicación crítica expuesta a Internet sin actualizaciones
 
@@ -679,6 +679,8 @@ El servidor de producción utiliza una versión obsoleta de la plataforma *JetBr
 
 1. **Contención inmediata**: Actualizar **TeamCity** a la ultima versión. Restringir el acceso a la plataforma exclusivamente desde la red interna o a través de conexión **VPN**
 2. **Acción definitva**: Establecer un proceso de revisión mensual de actualizaciones de seguridad e incoporar herramientas que alerten automáticamente cuando un sistema presente fallos conocidos. Documentar todo el proceso de revisión.
+
+---
 
 ### Hallazgo-2: Privilegios de administración excesivos en cuenta de servicio
 
