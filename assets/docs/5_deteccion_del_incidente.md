@@ -48,7 +48,7 @@ Extraemos la fecha de cuando se creó: `Jul  4 22:32:37`
 
 Extraemos el punct: `___::__[]:__:_=,_=,_=,_=//,_=//,_=///`
 
-4. ¿Qué tipo de shell se creó?
+4\. ¿Qué tipo de shell se creó?
 
 En la misma captura del evento, extraemos la shell que se ha creaado: `shell=/bin/bash`
 
